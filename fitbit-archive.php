@@ -107,7 +107,11 @@ class Fitbit_Archive_Foghlaim {
 		$oauth_token = $this->fitbit->getOAuthToken();
 		$oauth_secret = $this->fitbit->getOAuthSecret();
 
-		// Save token data in user meta
+		if ( empty( $oauth_token ) || empty( $oauth_secret ) )
+			wp_die( 'Empty callback data received from OAuth', 'Invalid Fitbit Authentication' );
+
+		$user_id = get_current_user_id();
+		update_user_meta( $user_id, $oauth_token, $oauth_secret );
 	}
 
 	private function setup_fitbit() {
