@@ -97,10 +97,12 @@ class Fitbit_Archive_Foghlaim {
 
 	private function auth_fitbit() {
 		$this->new_fitbit();
-		$this->fitbit->initSession( 'http://failurepuppy.com/fitbit-test/callback.php' );
+		// @todo still thinking about this URL
+		$this->fitbit->initSession( admin_url( 'fitbit-archive-callback' ) );
 	}
 
 	private function handle_callback() {
+		// expect admin_url from auth_fitibt, $_GET['oauth_token'] and $_GET['oauth_verifier']
 		$this->auth_fitbit();
 		$oauth_token = $this->fitbit->getOAuthToken();
 		$oauth_secret = $this->fitbit->getOAuthSecret();
