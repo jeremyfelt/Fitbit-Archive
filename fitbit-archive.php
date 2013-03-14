@@ -101,13 +101,11 @@ class Fitbit_Archive_Foghlaim {
 	}
 
 	private function handle_callback() {
-		$this->new_fitbit();
-		$this->fitbit->initSession( 'http://failurepuppy.com/fitbit-test/callback.php' );
-
+		$this->auth_fitbit();
 		$oauth_token = $this->fitbit->getOAuthToken();
 		$oauth_secret = $this->fitbit->getOAuthSecret();
 
-		// Save token data
+		// Save token data in user meta
 	}
 
 	private function setup_fitbit() {
